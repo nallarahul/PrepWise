@@ -9,8 +9,8 @@ import { getCurrentUser, getInterviewsByUserId } from '@/lib/actions/auth.action
 const Page = async () => {
   const user = await getCurrentUser();
   const [userInterviews, latestInterviews] = await Promise.all([
-    await getInterviewsByUserId(user?.id!),
-    await getInterviewsByUserId(user?.id!)
+    await getInterviewsByUserId(user?.id!) ?? [],
+    await getInterviewsByUserId(user?.id!) ?? []
   ]);
 
   const hasPastInterviews = userInterviews?.length > 0;
