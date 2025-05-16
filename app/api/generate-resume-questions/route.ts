@@ -4,7 +4,7 @@ import { generateText } from "ai";
 import { getRandomInterviewCover } from "@/lib/utils";
 import { db } from "@/firebase/admin";
 import pdfParse from "pdf-parse/lib/pdf-parse.js";
-import { getCurrentUser } from "@/lib/actions/auth.action"; // ✅ Imported user fetching logic
+import { getCurrentUser } from "@/lib/actions/auth.action";
 
 export const config = {
   api: {
@@ -15,7 +15,7 @@ export const config = {
 export async function POST(req: NextRequest) {
   try {
     const user = await getCurrentUser();
-    console.log(user); // ✅ Get current user
+    console.log(user);
     const formData = await req.formData();
     const file = formData.get("resume") as File;
     const amount = formData.get("amount");
@@ -56,7 +56,7 @@ Do NOT add markdown, no triple backticks, no labels, no comments. Just pure JSON
       level: "auto-detected",
       techstack: [],
       questions: JSON.parse(cleaned),
-      userId: user?.id ?? "anonymous", // ✅ Assign current user ID
+      userId: user?.id ?? "anonymous",
       finalized: true,
       coverImage: getRandomInterviewCover(),
       createdAt: new Date().toISOString(),
